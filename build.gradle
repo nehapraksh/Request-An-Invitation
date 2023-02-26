@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.21' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    minSdkVersion = 26
+    targetSdkVersion = 32
+    compileSdkVersion = 33
+
+    androidXVersion = '1.7.0'
+    appCompatVersion = '1.6.1'
+    constraintLayoutVersion = '2.1.4'
+    googleMaterialVersion = '1.8.0'
+
+    gsonVersion='2.8.9'
+    retrofit2Version='2.9.0'
+    okhttp3Version='4.9.3'
+    glideVersion='4.15.0'
+
+    lifecycleKtxVersion = '1.1.1'
+    viewmodelKtxVersion = '2.5.1'
+
+    junit4Version = '4.13.1'
+    junitVersion = '1.1.5'
+
+    coroutineCoreVersion ='1.4.2'
+    coroutinesAndroidVersion = '1.6.1'
+
+    mockitoCoreVersion='4.2.0'
+    mockitoInlineVersion='3.0.0'
+    mockitoAndroidVersion='2.24.5'
+
+    espressoCoreVersion = '3.5.1'
+    coreTestingVersion = '2.2.0'
+    mockServerVersion = '4.9.0'
+
+}

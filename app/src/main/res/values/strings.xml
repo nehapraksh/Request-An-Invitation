@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Invite</string>
+    <string name="title">Broccoli &amp; Co. welcomes you!</string>
+    <string name="invite_description">Send invitation to the people to grant beta access to our service.</string>
+    <string name="send_invite">Send an invite</string>
+    <string name="cancel_invite">Cancel invite</string>
+    <string name="email_exist">This email address is already in use</string>
+    <string name="cancel_description">Your email has been registered to access our service</string>
+    <string name="enter_name">Enter Full Name</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_confirm_email">Confirm email</string>
+    <string name="action_send">Send</string>
+    <string name="cancel_alert_msg">Are you sure you want to cancel the invitation?</string>
+    <string name="alert_title">Alert!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="invalid_full_name">Full name must contain more than 2 characters</string>
+    <string name="incorrect_email">Incorrect email</string>
+    <string name="incorrect_confirm_email">Confirm email text does not match email text</string>
+    <string name="congrats_text">Congratulation!</string>
+    <string name="cancel_text">Done!</string>
+    <string name="cancel_success_description">Your invitation has been cancelled successfully.</string>
+    <string name="invite_success_description">Your invitation has been sent successfully.</string>
+</resources>
