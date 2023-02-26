@@ -1,2 +1,2 @@
 # Request-An-Invitation
-A demo kotlin application for sending and canceling an invite.
+A demo application developed in Kotlin for sending and canceling an invite.
