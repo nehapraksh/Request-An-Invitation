@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 import retrofit2.Response
 

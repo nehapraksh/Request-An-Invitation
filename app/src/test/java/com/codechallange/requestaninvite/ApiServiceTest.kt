@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -21,7 +21,7 @@ class ApiServiceTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         gson = GsonBuilder()
             .setLenient()
             .create()

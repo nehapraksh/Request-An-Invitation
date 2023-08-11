@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 /*
 * repository class for sending invitation logic

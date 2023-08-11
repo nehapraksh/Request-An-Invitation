@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

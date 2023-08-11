@@ -7,7 +7,7 @@ android {
     compileSdk rootProject.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.codechallange.blinqcodechallenge"
+        applicationId "com.codechallange.requestaninvite"
         minSdk rootProject.minSdkVersion
         targetSdk rootProject.targetSdkVersion
         versionCode 1

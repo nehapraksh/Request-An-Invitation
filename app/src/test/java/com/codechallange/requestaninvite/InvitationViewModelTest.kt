@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
@@ -32,7 +31,7 @@ class InvitationViewModelTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(testDispatcher)
         invitationRepository = InvitationRepository(apiService)
         invitationViewModel = InvitationViewModel(invitationRepository)

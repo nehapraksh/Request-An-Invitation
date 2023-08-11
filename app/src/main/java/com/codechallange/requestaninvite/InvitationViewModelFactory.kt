@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

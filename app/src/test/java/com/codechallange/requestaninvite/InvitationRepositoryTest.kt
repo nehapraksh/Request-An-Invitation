@@ -1,4 +1,4 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
@@ -21,7 +21,7 @@ class InvitationRepositoryTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         invitationRepository = InvitationRepository(apiService)
     }
 

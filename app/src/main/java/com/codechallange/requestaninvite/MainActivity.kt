@@ -1,28 +1,34 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.codechallange.blinqcodechallenge.Util.afterTextChanged
-import com.codechallange.blinqcodechallenge.Util.isSameEmail
-import com.codechallange.blinqcodechallenge.Util.isValidEmail
-import com.codechallange.blinqcodechallenge.Util.isValidName
-import com.codechallange.blinqcodechallenge.Util.show
-import com.codechallange.blinqcodechallenge.Util.showAlert
-import com.codechallange.blinqcodechallenge.Util.showErrorDialog
-import com.codechallange.blinqcodechallenge.Util.userPreference
-import com.codechallange.blinqcodechallenge.Util.userRegistered
-import com.codechallange.blinqcodechallenge.databinding.ActivityMainBinding
+import com.codechallange.requestaninvite.Util.afterTextChanged
+import com.codechallange.requestaninvite.Util.isSameEmail
+import com.codechallange.requestaninvite.Util.isValidEmail
+import com.codechallange.requestaninvite.Util.isValidName
+import com.codechallange.requestaninvite.Util.show
+import com.codechallange.requestaninvite.Util.showAlert
+import com.codechallange.requestaninvite.Util.showErrorDialog
+import com.codechallange.requestaninvite.Util.userEmails
+import com.codechallange.requestaninvite.Util.userPreference
+import com.codechallange.requestaninvite.Util.userRegistered
+import com.codechallange.requestaninvite.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var builder: AlertDialog
     private lateinit var invitationViewModel: InvitationViewModel
     private lateinit var binding: ActivityMainBinding
+    private var email: Set<String> = setOf()
+    private var current_email: String? = null
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +42,12 @@ class MainActivity : AppCompatActivity() {
         invitationViewModel = ViewModelProvider(this, InvitationViewModelFactory())
             .get(InvitationViewModel::class.java)
         // initialise the sharedpreference
-        val prefs = userPreference(this, PREF_NAME)
+        prefs = userPreference(this, PREF_NAME)
         // set data to views based on the value saved in memory
-        if (prefs.userRegistered)
-            setCancelView()
-        else
-            setInviteView()
+//        if (prefs.userRegistered)
+//            setCancelView(prefs.userEmails)
+//        else
+        setInviteView(prefs.userEmails)
         // send or cancel invite button click listener
         binding.invitationBtn.setOnClickListener {
             if (binding.invitationBtn.text == getString(R.string.send_invite))
@@ -60,6 +66,13 @@ class MainActivity : AppCompatActivity() {
         }
         // observer to observe the send invite success response
         invitationViewModel.invitationResponse.observe(this) {
+            if(current_email!=null ) {
+                if(prefs.userEmails!=null ) {
+                    email = prefs.userEmails!!.toSet()
+                    email.plus(current_email)
+                    prefs.userEmails = email
+                }else prefs.userEmails = email.plus(current_email)
+            }
             prefs.userRegistered = true
             openInviteOrCancelSuccessView(true)
         }
@@ -142,7 +155,7 @@ class MainActivity : AppCompatActivity() {
                         email = email.text.toString().trim()
                     )
                 )
-
+                current_email = email.text.toString().trim()
             }
         }
         builder.setCanceledOnTouchOutside(false)
@@ -171,11 +184,8 @@ class MainActivity : AppCompatActivity() {
         }
         congratsBuilder.setView(view)
         closeButton.setOnClickListener {
-            if (inRegister) {
-                setCancelView()
-            } else {
-                setInviteView()
-            }
+            if(this::prefs.isInitialized)
+                setInviteView(prefs.userEmails)
             congratsBuilder.dismiss()
         }
         congratsBuilder.setCanceledOnTouchOutside(false)
@@ -185,15 +195,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     // function to set the send invite view
-    private fun setInviteView() {
+    private fun setInviteView(userEmails: MutableSet<String>?) {
         binding.descriptionTv.text = getString(R.string.invite_description)
         binding.invitationBtn.text = getString(R.string.send_invite)
+        if(!userEmails.isNullOrEmpty()) {
+            binding.emailList.visibility = View.VISIBLE
+            binding.emailList.text = userEmails.toString()//joinToString(",")
+        }else {
+            binding.emailList.visibility = View.GONE
+        }
+
     }
 
     // function to set the cancel invite view
-    private fun setCancelView() {
-        binding.descriptionTv.text = getString(R.string.cancel_description)
-        binding.invitationBtn.text = getString(R.string.cancel_invite)
+    private fun setCancelView(userEmails: MutableSet<String>?) {
+        //binding.descriptionTv.text = getString(R.string.cancel_description)
+        //binding.invitationBtn.text = getString(R.string.cancel_invite)
+        binding.emailList.text = userEmails?.toString()
     }
 
 

@@ -1,6 +1,5 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.SharedPreferences
@@ -9,13 +8,13 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 
 
 object Util {
     private const val USER_REGISTERED = "USER_REGISTERED"
+    private const val USER_EMAIL = "USER_EMAIL"
 
     /*
     *
@@ -90,6 +89,14 @@ object Util {
         set(value) {
             editMe {
                 it.clear()
+            }
+        }
+
+    var SharedPreferences.userEmails
+        get() = getStringSet(USER_EMAIL, null)
+        set(value){
+            editMe {
+                it.putStringSet(USER_EMAIL,value)
             }
         }
 

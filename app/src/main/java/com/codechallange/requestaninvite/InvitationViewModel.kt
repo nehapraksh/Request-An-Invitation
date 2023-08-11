@@ -1,11 +1,11 @@
-package com.codechallange.blinqcodechallenge
+package com.codechallange.requestaninvite
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class InvitationViewModel (private val invitationRepository: InvitationRepository) : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
@@ -16,15 +16,19 @@ class InvitationViewModel (private val invitationRepository: InvitationRepositor
     // function to send invitation
     fun sendInvitation(invitationModel: InvitationModel) {
         viewModelScope.launch {
-            when (val response = invitationRepository.sendInvitation(invitationModel)) {
-                is Result.Success -> {
-                    invitationResponse.postValue(response.data)
-                }
-                is Result.Error -> {
-                    if (response.response.code() == 400) {
-                        onError("This email address is already in use")
+            try {
+                when (val response = invitationRepository.sendInvitation(invitationModel)) {
+                    is Result.Success -> {
+                        invitationResponse.postValue(response.data)
+                    }
+                    is Result.Error -> {
+                        if (response.response.code() == 400) {
+                            onError("This email address is already in use")
+                        }
                     }
                 }
+            }catch (e:Exception){
+                onError(e.message.toString())
             }
         }
     }
